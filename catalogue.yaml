@@ -48,7 +48,7 @@
     ansible.builtin.command: mongo --host mongodb.vidyasagar.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.product_count()'
     register: product_count
   - name: print the count
-    anisble.builtin.debug:
+    ansible.builtin.debug:
       msg: "product count: {{product_count}}"
   - name: load catalogue data
     ansibel.builtin.command: mongo --host mongodb.vidyasagar.online < /app/schema/catalogue.js
