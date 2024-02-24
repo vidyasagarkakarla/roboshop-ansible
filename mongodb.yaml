@@ -2,7 +2,7 @@
   hosts: mongodb
   become: yes
   tasks:
-  - name: Cpoy mongodb repo
+  - name: Copy mongodb repo
     ansible.builtin.copy:
       src: mongodb.repo
       dest: /etc/yum.repos.d/mongodb.repo
@@ -14,7 +14,7 @@
     ansible.builtin.service:
       name: mongod
       state: started
-      enables: yes
+      enabled: yes
   - name: allow remote connections
     ansible.builtin.replace:
       path: /etc/mongod.conf
