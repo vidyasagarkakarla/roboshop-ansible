@@ -11,6 +11,10 @@
   - name: create roboshop user
     ansible.builtin.user:
       name: roboshop
+  - name: Recursively remove app directory
+    ansible.builtin.file:
+      path: /app
+      state: absent
   - name: create app directory
     ansible.builtin.file:
       path: /app
@@ -47,9 +51,9 @@
   - name: get the categories count
     ansible.builtin.command:  mongo --host mongodb.vidyasagar.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
     register: product_count
-  - name: print the count
-    ansible.builtin.debug:
-      msg: "product count: {{product_count}}"
+  # - name: print the count
+  #   ansible.builtin.debug:
+  #     msg: "product count: {{product_count}}"
   - name: load catalogue data
     ansible.builtin.command: mongo --host mongodb.vidyasagar.online < /app/schema/catalogue.js
     when: product_count.stdout == "0"
